@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <!-- Include Google Maps JS API -->
+        <script type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js?libraries=drawing&sensor=false">
+        </script>
+        <style type="text/css">
+              html { height: 100% }
+              body { height: 100%; margin: 0; }
+              #mapDiv { width: 100%; height: 100%; }
+              .controlContainer { padding: 5px; }
+              .controlButton { border-style:solid; border-color:red; border-width:3px; padding:8px; font-size:150% !important; color:red; background-color:black; font-weight:bold !important;}
+        </style>
+        <!-- Map creation is here -->
+        <script type="text/javascript">
+              //Defining map as a global variable to access from other functions
+              var map;
+              function initMap () {
+                    //Enabling new cartography and themes
+                    google.maps.visualRefresh = true;
+
+                    //Setting starting options of map
+                    var mapOptions = {
+                          center: new google.maps.LatLng(39.9078, 32.8252),
+                          zoom: 10,
+                          mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    //Getting map DOM element
+                    var mapElement = document.getElementById('mapDiv');
+
+                    //Creating a map with DOM element which is just obtained
+                    map = new google.maps.Map(mapElement, mapOptions);
+
+                    var drawingManager = new google.maps.drawing.DrawingManager();
+                    // To hide:
+                    drawingManager.setOptions({
+                      drawingControl: true
+                    });
+                    drawingManager.setMap(map);
+
+                    //create div, to be used as container div for the custom control GeoLocationControl
+                    var toolManagerDiv = document.createElement('div');
+                    //instantiate the custom control object
+                    var toolManager = new ToolManagerControl(toolManagerDiv, map);
+                    //place the control among other map controls in the map UI
+                    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(toolManagerDiv);
+              }
+
+              google.maps.event.addDomListener(window, 'load', initMap);
+
+              //create a JavaScript class as a custom control
+              function ToolManagerControl(toolManagerDiv, map)
+              {
+                //set css class of the container div
+                toolManagerDiv.className = 'controlContainer btn-group-vertical';
+                
+                //set css class of internal div that should look like a button
+                var saveButton = document.createElement('div');
+                saveButton.className = 'btn btn-success';
+                saveButton.innerHTML = '<i class="fa fa-2x fa-check"></i>';
+
+                //set css class of internal div that should look like a button
+                var infoButton = document.createElement('div');
+                infoButton.className = 'btn btn-info';
+                infoButton.innerHTML = '<i class="fa fa-2x fa-info-circle"></i>';
+
+                //set css class of internal div that should look like a button
+                var deleteButton = document.createElement('div');
+                deleteButton.className = 'btn btn-danger';
+                deleteButton.innerHTML = '<i class="fa fa-2x fa-times-circle"></i>';
+
+                //set css class of internal div that should look like a button
+                var editButton = document.createElement('div');
+                editButton.className = 'btn btn-primary';
+                editButton.innerHTML = '<i class="fa fa-2x fa-edit"></i>';
+
+                //set css class of internal div that should look like a button
+                var markerButton = document.createElement('div');
+                markerButton.className = 'btn btn-default';
+                markerButton.innerHTML = '<i class="fa fa-2x fa-map-marker"></i>';
+
+                //set css class of internal div that should look like a button
+                var handButton = document.createElement('div');
+                handButton.className = 'btn btn-default';
+                handButton.innerHTML = '<i class="fa fa-2x fa-coffee"></i>';
+
+                //set css class of internal div that should look like a button
+                var lineButton = document.createElement('div');
+                lineButton.className = 'btn btn-default';
+                lineButton.innerHTML = '<i class="fa fa-2x fa-coffee"></i>';
+
+                //set css class of internal div that should look like a button
+                var polygonButton = document.createElement('div');
+                polygonButton.className = 'btn btn-default';
+                polygonButton.innerHTML = '<i class="fa fa-2x fa-coffee"></i>';
+                
+                //add the internal div to the container div
+                toolManagerDiv.appendChild(handButton);
+                toolManagerDiv.appendChild(markerButton);
+                toolManagerDiv.appendChild(polygonButton);
+                toolManagerDiv.appendChild(lineButton);
+                toolManagerDiv.appendChild(editButton);
+                toolManagerDiv.appendChild(infoButton);
+                toolManagerDiv.appendChild(deleteButton);
+                toolManagerDiv.appendChild(saveButton);
+                
+              }
+
+        </script>
+    </head>
+    <body>
+        <div id="mapDiv"></div>
+         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://code.jquery.com/jquery.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+    </body>
+</html>
