@@ -96,10 +96,7 @@
                 lineButton.className = 'btn btn-default';
                 lineButton.innerHTML = '<i class="fa fa-2x fa-arrows-h"></i>';
 
-                //set css class of internal div that should look like a button
-                var polygonButton = document.createElement('div');
-                polygonButton.className = 'btn btn-default';
-                polygonButton.innerHTML = '<i class="fa fa-2x fa-square-o"></i>';
+                
                 
                 //add the internal div to the container div
                 toolManagerDiv.appendChild(handButton);
@@ -111,6 +108,15 @@
                 toolManagerDiv.appendChild(deleteButton);
                 toolManagerDiv.appendChild(saveButton);
 
+                
+
+                //set css class of internal div that should look like a button
+                var polygonButton = document.createElement('div');
+                polygonButton.className = 'btn btn-default';
+                polygonButton.innerHTML = '<i class="fa fa-2x fa-square-o"></i>';
+
+                //add the internal div to the container div
+                toolManagerDiv.appendChild(polygonButton);
 
                 //add 'click' event listener for controlButton
                 google.maps.event.addDomListener(polygonButton, 'click', function() {
