@@ -21,6 +21,11 @@
         <script type="text/javascript">
               //Defining map as a global variable to access from other functions
               var map;
+              var drawingManager = new google.maps.drawing.DrawingManager();
+                    // To hide:
+              drawingManager.setOptions({
+                drawingControl: true
+              });
               function initMap () {
                     //Enabling new cartography and themes
                     google.maps.visualRefresh = true;
@@ -38,11 +43,6 @@
                     //Creating a map with DOM element which is just obtained
                     map = new google.maps.Map(mapElement, mapOptions);
 
-                    var drawingManager = new google.maps.drawing.DrawingManager();
-                    // To hide:
-                    drawingManager.setOptions({
-                      drawingControl: true
-                    });
                     drawingManager.setMap(map);
 
                     //create div, to be used as container div for the custom control GeoLocationControl
@@ -110,6 +110,12 @@
                 toolManagerDiv.appendChild(infoButton);
                 toolManagerDiv.appendChild(deleteButton);
                 toolManagerDiv.appendChild(saveButton);
+
+
+                //add 'click' event listener for controlButton
+                google.maps.event.addDomListener(polygonButton, 'click', function() {
+                  drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
+                });
                 
               }
 
