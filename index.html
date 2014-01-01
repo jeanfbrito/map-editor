@@ -100,6 +100,8 @@
                 var polygonButton = document.createElement('div');
                 polygonButton.className = 'btn btn-default';
                 polygonButton.innerHTML = '<i class="fa fa-2x fa-square-o"></i>';
+                polygonButton.setAttribute('data-toggle','tooltip');
+                polygonButton.setAttribute('title','Demarcar área');
                 
                 //add the internal div to the container div
                 toolManagerDiv.appendChild(handButton);
@@ -111,20 +113,44 @@
                 toolManagerDiv.appendChild(deleteButton);
                 toolManagerDiv.appendChild(saveButton);
 
+                //add 'click' event listener for markerButton
+                google.maps.event.addDomListener(markerButton, 'click', function() {
+                  $(".controlContainer .active").removeClass("active");
+                  drawingManager.setDrawingMode(google.maps.drawing.OverlayType.MARKER);
+                  markerButton.className = markerButton.className + ' active';
+                });
 
-                //add 'click' event listener for controlButton
+                //add 'click' event listener for polygonButton
                 google.maps.event.addDomListener(polygonButton, 'click', function() {
+                  $(".controlContainer .active").removeClass("active");
                   drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
+                  polygonButton.className = polygonButton.className + ' active';
+                });
+
+                //add 'click' event listener for handButton
+                google.maps.event.addDomListener(handButton, 'click', function() {
+                  $(".controlContainer .active").removeClass("active");
+                  drawingManager.setDrawingMode(google.maps.drawing.OverlayType.NULL);
+                  handButton.className = handButton.className + ' active';
+                });
+
+                //add 'click' event listener for handButton
+                google.maps.event.addDomListener(lineButton, 'click', function() {
+                  $(".controlContainer .active").removeClass("active");
+                  drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYLINE);
+                  lineButton.className = lineButton.className + ' active';
                 });
                 
               }
+
 
         </script>
     </head>
     <body>
         <div id="mapDiv"></div>
-         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://code.jquery.com/jquery.js"></script>
-      <!-- Latest compiled and minified JavaScript -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.js"></script>
     </body>
 </html>
